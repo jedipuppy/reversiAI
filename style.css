@@ -1,0 +1,40 @@
+/* canvas要素 */
+canvas {
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
+	background-color: #397941;
+	padding: 0;
+	margin: 0;
+}
+
+
+/* body要素 */
+body {
+	font-size: 20px;
+	background-color: #ffffff;
+	padding: 0;
+	margin: 0;
+}
+
+div.contents{
+	background-color: #000;
+}
+.nav {
+	padding: 0;
+	margin: 0;
+    display: table;
+    width: 300px;
+    color: #FFF;
+    list-style:none;
+    font-weight:700;
+    background-color: #000;
+}
+.nav__item {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+}
+.nav__item2{
+	margin-right:20px;
+}
