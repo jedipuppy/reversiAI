@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>6*6 othello</title>
+<meta name="Description" content="" />
+<meta name="Keywords"  content="" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" media="screen,print" href="style.css" />
+<script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+	<div class="contents">
+
+		<div>
+			<canvas id="canvas"></canvas>
+
+		</div>
+		<div >
+			<ul class="nav">
+    <li class="nav__item">黒：</li>
+    <li class="nav__item2" id ="black_win_num">0</li>
+    <li class="nav__item">白：</li>
+    <li class="nav__item2" id ="white_win_num">0</li>
+    <li class="nav__item">引き分け：</li>
+    <li class="nav__item2" id ="draw_win_num">0</li>
+</ul>
+		</div>
+
+</div>
+
+<form name="Preference">
+  <hr>
+  <div class="form-row align-items-center"  >
+    <div class="col-auto">
+      <label class="mr-sm-2" for="black_role">黒番</label>
+      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="black_role">
+        <option value="0">人</option>
+        <option value="1">CPU1</option>
+        <option value="2">CPU2</option>
+        <option value="3">CPU3</option>
+        <option value="4">CPU4</option>
+        <option value="5">CPU5</option>
+        <option value="6">CPU6</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <label class="mr-sm-2" for="white_role">白番</label>
+      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="white_role">
+        <option value="0">人</option>
+        <option value="1">CPU1</option>
+        <option value="2">CPU2</option>
+        <option value="3">CPU3</option>
+        <option value="4">CPU4</option>
+        <option value="5">CPU5</option>
+        <option value="6">CPU6</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <label class="mr-sm-2" for="game_speed">速さ</label>
+      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="game_speed">
+        <option value="0">低速</option>
+        <option value="1">高速</option>
+        <option value="2">超高速</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-primary" onclick="restart()">設定</button>
+    </div>
+  </div>
+  <hr>
+    <div class="form-row align-items-center"  >
+    <div>
+      <label class="mr-sm-2" for="ana_role">解析用AI</label>
+      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="ana_role">
+        <option value="1">CPU1</option>
+        <option value="2">CPU2</option>
+        <option value="3">CPU3</option>
+        <option value="4">CPU4</option>
+        <option value="5">CPU5</option>
+        <option value="6">CPU6</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-primary" onclick="analysis()">解析</button>
+    </div>
+</div>
+    <hr>
+      <div class="col-auto">
+
+<input type="text" name="AIname">
+      <button type="button" class="btn btn-primary" onclick="upload();return false;">登録</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+</body>
+</html>
