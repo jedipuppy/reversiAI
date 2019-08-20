@@ -1,104 +1,268 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>6*6 othello</title>
-<meta name="Description" content="" />
-<meta name="Keywords"  content="" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" media="screen,print" href="style.css" />
-<script type="text/javascript" src="index.js"></script>
-</head>
-<body>
-	<div class="contents">
+  <head>
+    <meta charset="UTF-8" />
+    <title>6*6 reversi</title>
+    <meta name="Description" content="" />
+    <meta name="Keywords" content="" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+      integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen,print"
+      href="./assets/css/style.css"
+    />
+    <script type="text/javascript" src="./assets/js/reversi-core.js"></script>
 
-		<div>
-			<canvas id="canvas"></canvas>
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="assets/codemirror/lib/codemirror.css" />
+    <script src="assets/codemirror/lib/codemirror.js"></script>
+    <script src="assets/codemirror/mode/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="assets/codemirror/theme/monokai.css" />
+  </head>
+  <body class="bg-black">
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Othello AIをつくろう</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >オセロゲーム <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">AI作成</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">シミュレーション</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main role="main">
+      <div class="contents mx-auto">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 ">
+            <div class="shadow p-3 rounded bg-dark h-100 boardarea ">
+            <canvas id="canvas" class=""></canvas>
+                    <div class="row">
+                      <div class="p-2 col-md-3 col-sm-6"><button type="button"class="btn btn-secondary w-100" onclick="moves_back()" > <</button></div>
+                      <div class="p-2 col-md-3 col-sm-6"><button type="button"class="btn btn-secondary w-100" onclick="moves_next()" > ></button></div>
 
-		</div>
-		<div >
-			<ul class="nav">
-    <li class="nav__item">黒：</li>
-    <li class="nav__item2" id ="black_win_num">0</li>
-    <li class="nav__item">白：</li>
-    <li class="nav__item2" id ="white_win_num">0</li>
-    <li class="nav__item">引き分け：</li>
-    <li class="nav__item2" id ="draw_win_num">0</li>
-</ul>
-		</div>
-
+                      <div class="p-2 col-md-3 col-sm-6">      
+                        <select class=" custom-select" name="ana_role">
+                          <option value="original">自分のAI</option>
+                          <option value="AI1">AIサンプル１</option>
+                          <option value="AI2">AIサンプル２</option>
+                          <option value="AI3">AIサンプル３</option>
+                          <option value="AI4">AIサンプル４</option>
+                          <option value="AI5">AIサンプル５</option>
+                          <option value="AI6">AIサンプル６</option>
+                        </select>
+                      </div>
+                    <div class="p-2 col-md-3 col-sm-6"><button type="button"class="btn btn-secondary w-100" onclick="analysis()" > 解析</button></div>
+                    </div>
+                    <div class="progress">
+  <div id ="black_wins" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">黒　0 回</div>
+  <div id ="draws" class="progress-bar bg-success" role="progressbar" style="width: 34%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">引き分け　0 回</div>
+  <div id ="white_wins" class="progress-bar bg-info" role="progressbar" style="width: 33%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">白　0 回</div>
 </div>
+                    
+        </div>
 
-<form name="Preference">
-  <hr>
-  <div class="form-row align-items-center"  >
-    <div class="col-auto">
-      <label class="mr-sm-2" for="black_role">黒番</label>
-      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="black_role">
-        <option value="0">人</option>
-        <option value="1">CPU1</option>
-        <option value="2">CPU2</option>
-        <option value="3">CPU3</option>
-        <option value="4">CPU4</option>
-        <option value="5">CPU5</option>
-        <option value="6">CPU6</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <label class="mr-sm-2" for="white_role">白番</label>
-      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="white_role">
-        <option value="0">人</option>
-        <option value="1">CPU1</option>
-        <option value="2">CPU2</option>
-        <option value="3">CPU3</option>
-        <option value="4">CPU4</option>
-        <option value="5">CPU5</option>
-        <option value="6">CPU6</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <label class="mr-sm-2" for="game_speed">速さ</label>
-      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="game_speed">
-        <option value="0">低速</option>
-        <option value="1">高速</option>
-        <option value="2">超高速</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-primary" onclick="restart()">設定</button>
-    </div>
-  </div>
-  <hr>
-    <div class="form-row align-items-center"  >
-    <div>
-      <label class="mr-sm-2" for="ana_role">解析用AI</label>
-      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="ana_role">
-        <option value="1">CPU1</option>
-        <option value="2">CPU2</option>
-        <option value="3">CPU3</option>
-        <option value="4">CPU4</option>
-        <option value="5">CPU5</option>
-        <option value="6">CPU6</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-primary" onclick="analysis()">解析</button>
-    </div>
-</div>
-    <hr>
-      <div class="col-auto">
+          </div>
+          <div class="col-sm-12 col-md-6 ">
+            <div class="shadow p-3 rounded bg-dark h100">
+            <div class="codingarea">
+              <form name="CodingForm">
+                <div class="form-group-sm">
+                  <label for="AIfunc" class="text-white">Othello AIのコード</label>
+                  <textarea
+                    class="form-control"
+                    name="AIfunc"
+                    rows="40"
+                  ></textarea>
+              </form>
+              </div>
+            </div>
+          </div>
+          
+        </div>
 
-<input type="text" name="AIname">
-      <button type="button" class="btn btn-primary" onclick="upload();return false;">登録</button>
-    </div>
-  </div>
-</form>
+      </div>
+      <hr>
+      <div class="shadow rounded bg-dark p-3">
+        <form name="Preference">
+          <hr />
+          <div class="row">
+            <h5 class="col-12 text-white">対戦設定</h5>
+            <div class="col-md-3">
+              <label class="text-white" for="black_role">黒番</label>
+              <select class="custom-select " name="black_role">
+                <option value="0">人間</option>
+                <option value="original">自分のAI</option>
+                <option value="AI1">AIサンプル１</option>
+                <option value="AI2">AIサンプル２</option>
+                <option value="AI3">AIサンプル３</option>
+                <option value="AI4">AIサンプル４</option>
+                <option value="AI5">AIサンプル５</option>
+                <option value="AI6">AIサンプル６</option>
+              </select>
+            </div>
+            <div  class="text-white col-md-3">
+              <label for="white_role">白番</label>
+              <select class="custom-select rounded" name="white_role">
+                <option value="0">人間</option>
+                <option value="original">自分のAI</option>
+                <option value="AI1">AIサンプル１</option>
+                <option value="AI2">AIサンプル２</option>
+                <option value="AI3">AIサンプル３</option>
+                <option value="AI4">AIサンプル４</option>
+                <option value="AI5">AIサンプル５</option>
+                <option value="AI6">AIサンプル６</option>
+              </select>
+            </div>
+            <div  class="text-white col-md-3">
+              <label  class="text-white" for="game_speed">速さ</label>
+              <select class="custom-select form-control" name="game_speed">
+                <option value="0">低速</option>
+                <option value="1">高速</option>
+                <option value="2">超高速</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <button
+                type="button"
+                class="btn btn-secondary w-100 h-100"
+                onclick="restart()"
+              >
+                設定
+              </button>
+            </div>
+            <hr class="col-12" />
 
+            <h5 class="col-12 text-white">解析設定</h5>
+            <div class="col-md-3">
+              <label  class="text-white" for="ana_role">解析用AI</label>
+              <select class=" custom-select" name="ana_role">
+                <option value="original">自分のAI</option>
+                <option value="AI1">AIサンプル１</option>
+                <option value="AI2">AIサンプル２</option>
+                <option value="AI3">AIサンプル３</option>
+                <option value="AI4">AIサンプル４</option>
+                <option value="AI5">AIサンプル５</option>
+                <option value="AI6">AIサンプル６</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <button
+                type="button"
+                class="btn btn-secondary w-100 h-100"
+                onclick="analysis()"
+              >
+                解析
+              </button>
+            </div>
+            <hr class="col-12" />
+            <h5 class="col-12 text-white">AI登録</h5>
+            <div class="form-group-sm col-sm-3">
 
+                                                <label for="AIname" class=" text-whitecol-form-label">AIの名前</label>
+                                                <select name="AIname" class="form-control">Choose
+                                                        <option value="AI0">AI0</option>
+                                                        <option value="AI1">AI1</option>
+                                                        <option value="AI2">AI2</option>
+                                                        <option value="AI3">AI3</option>
+                                                        <option value="AI4">AI4</option>
+                                                        <option value="AI5">AI5</option>
+                                                        <option value="AI6">AI6</option>
+                                                        <option value="AI7">AI7</option>
+                                                        <option value="AI8">AI8</option>
+                                                        <option value="AI9">AI9</option>
+                                                        <option value="AI10">AI10</option>
+                                                        <option value="AI11">AI11</option>
+                                                        <option value="AI12">AI12</option>
+                                                        <option value="AI13">AI13</option>
+                                                        <option value="AI14">AI14</option>
+                                                        <option value="AI15">AI15</option>
+                                                        <option value="AI16">AI16</option>
+                                                        <option value="AI17">AI17</option>
+                                                        <option value="AI18">AI18</option>
+                                                        <option value="AI19">AI19</option>
+                                                        <option value="AI20">AI20</option>
+                                                        <option value="AI21">AI21</option>
+                                                        <option value="AI22">AI22</option>
+                                                        <option value="AI23">AI23</option>
+                                                        <option value="AI24">AI24</option>
+                                                        <option value="AI25">AI25</option>
+                                                        <option value="AI26">AI26</option>
+                                                        <option value="AI27">AI27</option>
+                                                        <option value="AI28">AI28</option>
+                                                        <option value="AI29">AI29</option>
+                                                        <option value="AI30">AI30</option>
+                                                </select>
+                                        </div>
+            <div class="col-md-3">
+              <button
+                type="button"
+                class="btn btn-secondary w-100 h-100"
+                onclick="uploadAI();">
+                登録
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
 
+  <script type="text/javascript">
+    //----------------------------------------
+    // CodeMirrorの設定
+    //----------------------------------------
+    let editor = CodeMirror.fromTextArea(document.CodingForm.AIfunc, {
+      lineNumbers: true,
+      mode: "javascript",
+      theme: "monokai",
+    });
+    editor.setSize(null, 600);
+    editor.setValue(loadAI());
 
-</body>
+    //----------------------------------------
+    // AIファイルの読み込み
+    //----------------------------------------
+    function loadAI() {
+      let xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", "AI/othello-AI.js", false);
+      xmlHttp.send(null);
+      return xmlHttp.responseText;
+    }
+  </script>
 </html>
